@@ -49216,17 +49216,17 @@ module.exports = {
 	authors:
 	[
 		{
-			id: '1',
+			id: 'samer-buna',
 			firstName: 'Samer',
 			lastName: 'Buna'
 		},
 		{
-			id: '2',
+			id: 'cory-house',
 			firstName: 'Cory',
 			lastName: 'House'
 		},
 		{
-			id: '3',
+			id: 'hendrik-swanepoel',
 			firstName: 'Hendrik',
 			lastName: 'Swanepoel'
 		}
@@ -49368,7 +49368,7 @@ var AuthorForm = React.createClass({displayName: "AuthorForm",
           value: this.props.author.lastName, 
           onChange: this.props.onChange}), 
         React.createElement("br", null), 
-        React.createElement("input", {type: "submit", value: "Save", className: "btn btn-default"})
+        React.createElement("input", {type: "submit", value: "Save", className: "btn btn-default", onClick: this.props.onSave})
       )
     );//end return
   }//end render function
@@ -49416,6 +49416,7 @@ module.exports = AuthorPage;
 
 var React = require('react');
 var AuthorForm = require('./authorForm');
+var AuthorApi = require('../../api/authorApi');
 
 var ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
   getInitialState: function() {
@@ -49431,18 +49432,24 @@ var ManageAuthorPage = React.createClass({displayName: "ManageAuthorPage",
     return this.setState({author: this.state.author});//change author to this.state.author
   },//end setAuthorState function
 
+  saveAuthor: function(event) {
+    event.preventDefault();
+    AuthorApi.saveAuthor(this.state.author);
+  },//end saveAuthor function
+
   render: function() {
     return (
         React.createElement(AuthorForm, {
         author: this.state.author, 
-        onChange: this.setAuthorState})
+        onChange: this.setAuthorState, 
+        onSave: this.saveAuthor})
     );//end return
   }//end render function
 });//end React.createClass
 
 module.exports = ManageAuthorPage;
 
-},{"./authorForm":204,"react":197}],207:[function(require,module,exports){
+},{"../../api/authorApi":198,"./authorForm":204,"react":197}],207:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
