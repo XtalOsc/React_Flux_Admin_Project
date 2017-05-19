@@ -45,6 +45,12 @@ Dispatcher.register(function(action) {
           _authors.splice(existingAuthorIndex, 1, action.author);
           AuthorStore.emitChange();
           break;
+      case ActionTypes.DELETE_AUTHOR:
+          _.remove(_authors, function(author) {
+            return action.id === author.id;
+          });//end _.remove function
+          AuthorStore.emitChange();
+          break;
     default:
          //no op
   }//end switch
